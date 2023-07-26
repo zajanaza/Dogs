@@ -21,7 +21,8 @@ export default function Home() {
     validateData(updateDog);                                                                                       
   };
 
-   //useEffect(() => {console.log(newDog)},[newDog]);                //mel by vypsat             
+   useEffect(() => {
+    console.log(listOfDogs)}, [listOfDogs]);                //mel by vypsat seznam psu do konzole        
 
   //validacni fce na form inputs, doplnuje hodnotu do valid pomoci setValid a valid je dosazena do Button nize
   const validateData = (dog) => {                                       
