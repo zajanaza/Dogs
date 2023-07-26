@@ -9,7 +9,7 @@ export default function Home() {
   const [newDog, setNewDog] = useState({
     //id:listOfDogs.length>0 ? Math.max(...listOfDogs.map (dog => dog.id)) + 1 : 1,  
     //pokud to pole nebude prazdne, tak hleda max id a pak dosadi id plus 1
-    id: dogsCount.current + 1,                                  //zapsano jinym zpusobem nez o radek vyse
+    id: dogsCount.current + 1,                                         //zapsano jinym zpusobem nez o radek vyse
     name:"",
     race:"",
     age:"",
@@ -39,9 +39,11 @@ export default function Home() {
     setListOfDogs((listOfDogs) => {
       return [...listOfDogs, newDog];
     });
-    const newId = newDog.id + 1;
+    //const newId = newDog.id + 1;                         //je mozne pracovat s dogsCount
+    dogsCount.current++;
     const updateDog = {
-      id: newId,
+      //id: newId,
+      id: dogsCount.current + 1,                          //je mozne pracovat s dogsCount
       name: '',
       race:'',
       age:''
