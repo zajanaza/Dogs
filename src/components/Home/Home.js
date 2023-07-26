@@ -1,7 +1,7 @@
 import React from "react"; 
 import { PageContainer, DogList, DogItem, DogForm, Input, Button } from "./HomeStyle";  
 import dogs from '../../dogsData';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [listOfDogs, setListOfDogs] = useState(dogs);
@@ -16,8 +16,11 @@ export default function Home() {
   const handleChange = (e) => {                                        //e je event-tedy zapis do inputu
     const updateDog = {...newDog, [e.target.name]: e.target.value};   //e.target a name rika, ze u 1. inputu je to name, u 2. race atd
     setNewDog(updateDog);
-    validateData(updateDog);                                       //probehne znovu validace inputu                                             
-  }
+    validateData(updateDog);                                                                                       
+  };
+
+   //useEffect(() => {console.log(newDog)},[newDog]);                //mel by vypsat             
+
   //validacni fce na form inputs, doplnuje hodnotu do valid pomoci setValid a valid je dosazena do Button nize
   const validateData = (dog) => {                                       
     if (dog.age === "" || parseInt(dog.age) < 0 || parseInt(dog.age) > 24) {
@@ -28,7 +31,22 @@ export default function Home() {
       return setValid(false);
     }
     setValid(true);
-  };
+  }; 
+
+  const handleAdd = () => {
+    setListOfDogs((listOfDogs) => {
+      return [...listOfDogs, newDog];
+    });
+    const newId = newDog.id + 1;
+    const updateDog = {
+      id: newId,
+      name: '',
+      race:'',
+      age:''
+    }
+    setNewDog(updateDog);        //zajisti pridani id novemu psovi a vyresetovani 
+    setValid(false);             //po pridani a resetovani poli opet spusti validaci
+  }  
   return (
     <PageContainer>
       <DogList name='dogList'>
@@ -58,8 +76,8 @@ export default function Home() {
             min='0'
             max='24'
             value={newDog.age}
-            onChange={handleChange}/>                      
-          <Button disabled={!valid}>Přidat</Button>
+            onChange={handleChange}/>                  
+          <Button disabled={!valid} onClick={handleAdd}>Přidat</Button>
         </DogForm>        
     </PageContainer>
   );
