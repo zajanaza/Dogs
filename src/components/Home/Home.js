@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Home() {
   const dogsCount = useRef(dogs.length);                               //nastavuje defaul value na 5 (delka puvodniho pole)
   const [listOfDogs, setListOfDogs] = useState(dogs);
-  const [newDog, setNewDog] = useState({
+  const [newDog, setNewDog] = useState({                               //slozene zavorky, protoze je to objekt
     //id:listOfDogs.length>0 ? Math.max(...listOfDogs.map (dog => dog.id)) + 1 : 1,  
     //pokud to pole nebude prazdne, tak hleda max id a pak dosadi id plus 1
     id: dogsCount.current + 1,                                         //zapsano jinym zpusobem nez o radek vyse
@@ -38,7 +38,7 @@ export default function Home() {
 
   const handleAdd = () => {
     setListOfDogs((listOfDogs) => {
-      return [...listOfDogs, newDog];
+      return [...listOfDogs, newDog];                      //updatuje hodnotu pole objektu tim, ze vezme puvodni listOfDogs a prida do nej newDog
     });
     //const newId = newDog.id + 1;                         //je mozne pracovat s dogsCount
     dogsCount.current++;
