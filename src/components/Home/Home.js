@@ -1,13 +1,15 @@
 import React from "react"; 
 import { PageContainer, DogList, DogItem, DogForm, Input, Button } from "./HomeStyle";  
 import dogs from '../../dogsData';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
+  const dogsCount = useRef(dogs.length);                               //nastavuje defaul value na 5 (delka puvodniho pole)
   const [listOfDogs, setListOfDogs] = useState(dogs);
   const [newDog, setNewDog] = useState({
-    id:listOfDogs.length>0 ? Math.max(...listOfDogs.map (dog => dog.id)) + 1 : 1,  
+    //id:listOfDogs.length>0 ? Math.max(...listOfDogs.map (dog => dog.id)) + 1 : 1,  
     //pokud to pole nebude prazdne, tak hleda max id a pak dosadi id plus 1
+    id: dogsCount.current + 1,                                  //zapsano jinym zpusobem nez o radek vyse
     name:"",
     race:"",
     age:"",
@@ -45,7 +47,7 @@ export default function Home() {
       age:''
     }
     setNewDog(updateDog);        //zajisti pridani id novemu psovi a vyresetovani 
-    setValid(false);             //po pridani a resetovani poli opet spusti validaci
+    setValid(false);             //po pridani a resetovani poli opet spusti
   }  
   return (
     <PageContainer>
