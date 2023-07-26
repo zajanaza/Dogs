@@ -13,6 +13,11 @@ export default function Home() {
     age:"",
   });
   const [valid, setValid] = useState(false);
+  const handleChange = (e) => {                                        //e je event-tedy zapis do inputu
+    const updateDog = {...newDog, [e.target.name]: e.target.value};   //e.target a name rika, ze u 1. inputu je to name, u 2. race atd
+    setNewDog(updateDog);
+    validateData(updateDog);                                       //probehne znovu validace inputu                                             
+  }
   //validacni fce na form inputs, doplnuje hodnotu do valid pomoci setValid a valid je dosazena do Button nize
   const validateData = (dog) => {                                       
     if (dog.age === "" || parseInt(dog.age) < 0 || parseInt(dog.age) > 24) {
@@ -38,22 +43,24 @@ export default function Home() {
             type='text' 
             placeholder='jmeno psa' 
             name='name'
-            value={newDog.name}/>   
+            value={newDog.name}
+            onChange={handleChange}/>                       
           <Input 
             type='text' 
             placeholder='rasa psa' 
             name='race'
-            value={newDog.race}/>  
+            value={newDog.race}
+            onChange={handleChange}/>  
           <Input 
             type='number' 
             placeholder='vek psa' 
             name='age'
             min='0'
             max='24'
-            value={newDog.age}/>                      
+            value={newDog.age}
+            onChange={handleChange}/>                      
           <Button disabled={!valid}>Přidat</Button>
-        </DogForm>
-        
+        </DogForm>        
     </PageContainer>
   );
 }
