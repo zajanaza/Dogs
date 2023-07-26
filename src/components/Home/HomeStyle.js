@@ -23,7 +23,28 @@ export const DogItem = styled.div`
     padding: 0 15px;
     align-items: center;
     justify-content: space-between;
-    background-color: #f4f2f3; &:nth-child(even) {
+    background-color: #f4f2f3; 
+    &:nth-child(even) {
       background-color: #c0a9bd;
     }
     `;
+
+//jak prestylovat uz nastylovane - DogList v tomto pripade
+export const DogForm = styled(DogList)`
+  flex-direction: row;
+  margin: 50px 0;
+  padding-top: 0;
+  justify-content: space-between;
+  align-items: center;
+  `;
+
+export const Input = styled.input`
+  width: 130px;
+  height: 25px;
+  padding-left: 10px;
+`;
+
+export const Button = styled.button`
+  width: 130px;
+  height: 25px;
+`;

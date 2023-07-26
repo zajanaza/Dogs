@@ -1,5 +1,5 @@
 import React from "react"; 
-import { PageContainer, DogList, DogItem } from "./HomeStyle";  
+import { PageContainer, DogList, DogItem, DogForm, Input, Button } from "./HomeStyle";  
 import dogs from '../../dogsData';
 import { useState } from "react";
 
@@ -14,6 +14,24 @@ export default function Home() {
           )
         })}
       </DogList>
+        <DogForm>
+          <Input 
+            type='text' 
+            placeholder='jmeno psa' 
+            name='name'/>   
+          <Input 
+            type='text' 
+            placeholder='rasa psa' 
+            name='race'/>  
+          <Input 
+            type='number' 
+            placeholder='vek psa' 
+            name='age'
+            min='0'
+            max='24'/> 
+          <Button>Přidat</Button>
+        </DogForm>
+        
     </PageContainer>
   );
 }
