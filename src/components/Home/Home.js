@@ -1,5 +1,5 @@
 import React from "react"; 
-import { PageContainer, DogList, DogItem, DogForm, Input, Button, Buttons, TabButton} from "./HomeStyle";  
+import { PageContainer, DogList, DogItem, DogForm, Input, Button, Buttons, TabButton, ShelterForm} from "./HomeStyle";  
 import dogs from '../../dogsData';
 import { useState, useEffect, useRef } from "react";
 
@@ -20,6 +20,11 @@ export default function Home() {
     food: 35,
     vaccine: 15,
     pills: 20,
+  });
+  const [tempStorage, setTempStorage] = useState({
+    food: '',
+    vaccine: '',
+    pills: '',
   });
   const handleChange = (e) => {                                        //e je event-tedy zapis do inputu
     const updateDog = {...newDog, [e.target.name]: e.target.value};   //e.target a name rika, ze u 1. inputu je to name, u 2. race atd
@@ -122,6 +127,26 @@ export default function Home() {
         <p>granule: {shelterStorage.food} kg</p>
         <p>vakcíny: {shelterStorage.vaccine} ks</p>
         <p>medikamenty: {shelterStorage.pills} ks</p>
+        <ShelterForm>
+            <Input
+              type='number'
+              min='0'
+              placeholder='granule (kg)'
+              name='food'
+            />
+            <Input
+              type='number'
+              min='0'
+              placeholder='vakcíny (ks)'
+              name='vaccine'
+            />
+            <Input
+              type='number'
+              min='0'
+              placeholder='léky (ks)'
+              name='pills'
+            />
+          </ShelterForm>
       </>)}               
     </PageContainer>
   );

@@ -73,3 +73,9 @@ export const TabButton = styled.button`
     }
   }}
 `;
+
+export const ShelterForm = styled(DogForm)`          //zase jen recyklace
+
+    flex-direction: column;
+
+`;        
