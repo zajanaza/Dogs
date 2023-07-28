@@ -70,6 +70,20 @@ export default function Home() {
     const updateStorage = {...tempStorage,[e.target.name]: e.target.value};
     setTempStorage(updateStorage);
   }
+  const updateStorage = () => {
+    const storageValue = tempStorage;
+    let newStorageValue = {};
+    const keys = Object.keys(storageValue);
+    //console.log(keys);                                    
+    keys.map((key) => {
+      if(parseInt(storageValue[key])){                          //pokud storageValue ma hodnotu, tak
+        newStorageValue[key] = parseInt(shelterStorage[key]) + parseInt (storageValue[key])   //secte se
+      } else {
+        newStorageValue[key] = parseInt(shelterStorage[key])
+      }
+    });
+    setShelterStorage(newStorageValue);
+  };
   return (
     <PageContainer>
       <Buttons>
@@ -156,7 +170,7 @@ export default function Home() {
               value={tempStorage.pills}
               onChange={handleStorage}
             />
-            <Button>Doplnit zásoby</Button>
+            <Button onClick={updateStorage}>Doplnit zásoby</Button>
           </ShelterForm>
       </>)}               
     </PageContainer>
