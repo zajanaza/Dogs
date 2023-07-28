@@ -21,7 +21,7 @@ export default function Home() {
     vaccine: 15,
     pills: 20,
   });
-  const [tempStorage, setTempStorage] = useState({
+  const [tempStorage, setTempStorage] = useState({                // k ulozeni hodnoty z inputu ve skladu
     food: '',
     vaccine: '',
     pills: '',
@@ -66,6 +66,10 @@ export default function Home() {
   const handleDelete = (idToDel) => {
     setListOfDogs(listOfDogs.filter(dog => dog.id != idToDel)) //fce na odebirani psu z listu spojena s tlacitkem
   }; 
+  const handleStorage = (e) => {
+    const updateStorage = {...tempStorage,[e.target.name]: e.target.value};
+    setTempStorage(updateStorage);
+  }
   return (
     <PageContainer>
       <Buttons>
@@ -129,23 +133,30 @@ export default function Home() {
         <p>medikamenty: {shelterStorage.pills} ks</p>
         <ShelterForm>
             <Input
-              type='number'
-              min='0'
-              placeholder='granule (kg)'
-              name='food'
+              type="number"
+              min="0"
+              placeholder="granule (kg)"
+              name="food"
+              value={tempStorage.food}
+              onChange={handleStorage}
             />
             <Input
-              type='number'
-              min='0'
-              placeholder='vakcíny (ks)'
-              name='vaccine'
+              type="number"
+              min="0"
+              placeholder="vakcíny (ks)"
+              name="vaccine"
+              value={tempStorage.vaccine}
+              onChange={handleStorage}
             />
             <Input
-              type='number'
-              min='0'
-              placeholder='léky (ks)'
-              name='pills'
+              type="number"
+              min="0"
+              placeholder="léky (ks)"
+              name="pills"
+              value={tempStorage.pills}
+              onChange={handleStorage}
             />
+            <Button>Doplnit zásoby</Button>
           </ShelterForm>
       </>)}               
     </PageContainer>
