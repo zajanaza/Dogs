@@ -31,7 +31,11 @@ export default function Home() {
     setNewDog(updateDog);
     validateData(updateDog);                                                                          
   };
-
+  const dogRequirements = {                                  //min. skladove zasoby pro 1 psa
+    food: 5,
+    vaccine: 1,
+    pills: 2,
+  };
   useEffect(() => {
     console.log(listOfDogs)}, [listOfDogs]);                //mel by vypsat seznam psu do konzole        
 
@@ -47,11 +51,24 @@ export default function Home() {
     setValid(true);
   }; 
 
-  const handleAdd = () => {
-    setListOfDogs((listOfDogs) => {
-      return [...listOfDogs, newDog];                      //updatuje hodnotu pole objektu tim, ze vezme puvodni listOfDogs a prida do nej newDog
-    });
-    //const newId = newDog.id + 1;                         //je mozne pracovat s dogsCount
+  const handleAdd = () => {                                   
+    let pushDog = false;
+    const totalRequirements = {
+      food:(dogRequirements.food * (listOfDogs.length + 1)),
+      vaccine:(dogRequirements.vaccine * (listOfDogs.length + 1)),
+      pills:(dogRequirements.pills * (listOfDogs.length + 1)),
+    }
+    if (totalRequirements.food <= shelterStorage.food &&          //zjisteni dostatku zasob pri pridavani psa
+        totalRequirements.vaccine <= shelterStorage.vaccine &&
+        totalRequirements.pills <= shelterStorage.pills
+    ){
+      pushDog = true;
+    }  
+    if (pushDog) {
+      setListOfDogs((listOfDogs) => {
+        return [...listOfDogs, newDog];                      //updatuje hodnotu pole objektu tim, ze vezme puvodni listOfDogs a prida do nej newDog
+      });
+      //const newId = newDog.id + 1;                         //je mozne pracovat s dogsCount
     dogsCount.current++;
     const updateDog = {
       //id: newId,
@@ -62,6 +79,9 @@ export default function Home() {
     }
     setNewDog(updateDog);        //zajisti pridani id novemu psovi a vyresetovani 
     setValid(false);             //po pridani a resetovani poli opet spusti
+    } else {
+      window.alert('Nemáš dost zásob')
+    }                      
   };
   const handleDelete = (idToDel) => {
     setListOfDogs(listOfDogs.filter(dog => dog.id != idToDel)) //fce na odebirani psu z listu spojena s tlacitkem
