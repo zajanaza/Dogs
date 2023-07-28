@@ -57,7 +57,17 @@ export default function Home() {
       <DogList name='dogList'>
         {listOfDogs.map((dog) => {
           return(
-            <DogItem key={dog.id}>{dog.name} / {dog.race} / {dog.age}</DogItem>
+            <DogItem key={dog.id}>{dog.name} / {dog.race} / {dog.age}
+            <button
+              style={{
+                color: '#64766a',
+                fontWeight: 'bolder',
+                border: 2 + 'px solid #64766a',
+                borderRadius: 50 + '%',
+                height: 25 + 'px',
+                width: 25 + 'px'
+              }}>X</button>
+            </DogItem>
           )
         })}
       </DogList>
