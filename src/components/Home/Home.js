@@ -70,7 +70,7 @@ export default function Home() {
     const updateStorage = {...tempStorage,[e.target.name]: e.target.value};
     setTempStorage(updateStorage);
   }
-  const updateStorage = () => {
+  const updateStorage = () => {                                //pricita hodnotu v inputu do zasob
     const storageValue = tempStorage;
     let newStorageValue = {};
     const keys = Object.keys(storageValue);
@@ -83,6 +83,7 @@ export default function Home() {
       }
     });
     setShelterStorage(newStorageValue);
+    setTempStorage({food:'', vaccine: '', pills: ''})         //hodnotu v inputech se po stisku tlacitka zresetuji
   };
   return (
     <PageContainer>
