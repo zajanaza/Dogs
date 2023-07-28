@@ -15,13 +15,19 @@ export default function Home() {
     age:"",
   });
   const [valid, setValid] = useState(false);
+  const [activeTab, setActiveTab] = useState("list-of-dogs");
+  const [ shelterStorage, setShelterStorage] = useState({
+    food: 35,
+    vaccine: 15,
+    pills: 20,
+  });
   const handleChange = (e) => {                                        //e je event-tedy zapis do inputu
     const updateDog = {...newDog, [e.target.name]: e.target.value};   //e.target a name rika, ze u 1. inputu je to name, u 2. race atd
     setNewDog(updateDog);
-    validateData(updateDog);                                                                                       
+    validateData(updateDog);                                                                          
   };
 
-   useEffect(() => {
+  useEffect(() => {
     console.log(listOfDogs)}, [listOfDogs]);                //mel by vypsat seznam psu do konzole        
 
   //validacni fce na form inputs, doplnuje hodnotu do valid pomoci setValid a valid je dosazena do Button nize
@@ -51,17 +57,22 @@ export default function Home() {
     }
     setNewDog(updateDog);        //zajisti pridani id novemu psovi a vyresetovani 
     setValid(false);             //po pridani a resetovani poli opet spusti
-  }
+  };
   const handleDelete = (idToDel) => {
     setListOfDogs(listOfDogs.filter(dog => dog.id != idToDel)) //fce na odebirani psu z listu spojena s tlacitkem
-  }  
+  }; 
   return (
     <PageContainer>
       <Buttons>
-        <TabButton>Seznam psů</TabButton>
-        <TabButton>Sklad útulku</TabButton>
+        <TabButton name='list-of-dogs'data-active={activeTab} onClick={() => setActiveTab('list-of-dogs')}>
+
+          
+          Seznam psů</TabButton>
+        <TabButton name='shelter-storage' data-active={activeTab} onClick={() => setActiveTab('shelter-storage')}>Sklad útulku</TabButton>
       </Buttons>
-      <DogList name='dogList'>
+      {(activeTab === 'list-of-dogs') && 
+        <>
+          <DogList name='dogList'>
         {listOfDogs.map((dog) => {
           return(
             <DogItem key={dog.id}>{dog.name} / {dog.race} / {dog.age}
@@ -103,7 +114,15 @@ export default function Home() {
             value={newDog.age}
             onChange={handleChange}/>                  
           <Button disabled={!valid} onClick={handleAdd}>Přidat</Button>
-        </DogForm>        
+        </DogForm>
+        </>} 
+      {(activeTab =='shelter-storage' &&
+      <>
+        <h3>Aktuální zásoby</h3>
+        <p>granule: {shelterStorage.food} kg</p>
+        <p>vakcíny: {shelterStorage.vaccine} ks</p>
+        <p>medikamenty: {shelterStorage.pills} ks</p>
+      </>)}               
     </PageContainer>
   );
 }

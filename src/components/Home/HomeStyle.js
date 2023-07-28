@@ -66,4 +66,10 @@ export const TabButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   background-color: transparent;
-`
+  ${(props) =>{
+    if (props.name === props['data-active']){
+      return `
+        background-color: rgba(255,255,255,0.3)`;
+    }
+  }}
+`;
