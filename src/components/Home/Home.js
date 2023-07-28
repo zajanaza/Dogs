@@ -1,5 +1,5 @@
 import React from "react"; 
-import { PageContainer, DogList, DogItem, DogForm, Input, Button } from "./HomeStyle";  
+import { PageContainer, DogList, DogItem, DogForm, Input, Button, Buttons, TabButton} from "./HomeStyle";  
 import dogs from '../../dogsData';
 import { useState, useEffect, useRef } from "react";
 
@@ -57,6 +57,10 @@ export default function Home() {
   }  
   return (
     <PageContainer>
+      <Buttons>
+        <TabButton>Seznam psů</TabButton>
+        <TabButton>Sklad útulku</TabButton>
+      </Buttons>
       <DogList name='dogList'>
         {listOfDogs.map((dog) => {
           return(
@@ -70,7 +74,7 @@ export default function Home() {
                   height: 25 + 'px',
                   width: 25 + 'px'
                 }}
-                onClick={() => {handleDelete(dog.id)}}>
+                onClick={() => {handleDelete(dog.id)}}>          
                   X
               </button>
             </DogItem>
