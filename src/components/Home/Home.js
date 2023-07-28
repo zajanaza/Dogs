@@ -51,6 +51,9 @@ export default function Home() {
     }
     setNewDog(updateDog);        //zajisti pridani id novemu psovi a vyresetovani 
     setValid(false);             //po pridani a resetovani poli opet spusti
+  }
+  const handleDelete = (idToDel) => {
+    setListOfDogs(listOfDogs.filter(dog => dog.id != idToDel)) //fce na odebirani psu z listu spojena s tlacitkem
   }  
   return (
     <PageContainer>
@@ -58,15 +61,18 @@ export default function Home() {
         {listOfDogs.map((dog) => {
           return(
             <DogItem key={dog.id}>{dog.name} / {dog.race} / {dog.age}
-            <button
-              style={{
-                color: '#64766a',
-                fontWeight: 'bolder',
-                border: 2 + 'px solid #64766a',
-                borderRadius: 50 + '%',
-                height: 25 + 'px',
-                width: 25 + 'px'
-              }}>X</button>
+              <button
+                style={{
+                  color: '#64766a',
+                  fontWeight: 'bolder',
+                  border: 2 + 'px solid #64766a',
+                  borderRadius: 50 + '%',
+                  height: 25 + 'px',
+                  width: 25 + 'px'
+                }}
+                onClick={() => {handleDelete(dog.id)}}>
+                  X
+              </button>
             </DogItem>
           )
         })}
